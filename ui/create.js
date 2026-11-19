@@ -1,3 +1,5 @@
+function normalizeCityPolicy(value){return value==='state'||value===true?'state':'city'}
+
 function emailCreatePreview(items,accounts,kind){
  const newCount=accounts.filter(a=>a.action==='create').length;
  const blockedCount=accounts.filter(a=>a.action==='blocked').length;
@@ -19,10 +21,7 @@ async function openCreate(items=null){
  openDialog('创建窗口',`<div class="stack">${items?`<div id="email-create-preview">${emailCreatePreview(items,accounts,initialKind)}</div>`:''}
  <div class="row"><label>环境类型<select id="create-kind"><option value="desktop">电脑浏览器</option><option value="phone">云手机</option></select></label><label>${items?'新建环境使用厂商':'使用厂商'}<select id="create-provider"></select></label></div>
  <div id="phone-network-options" hidden>
-  <label>本次分配设备范围<select id="create-device-scope">
-   <option value="inherit">沿用厂商方案的设备范围</option>
-   <option value="all_idle">全部空闲设备（不限品牌、型号或系统版本）</option>
-  </select></label>
+  <p class="note">新资料自动使用全部空闲设备，不限品牌、型号或系统版本。</p>
   <small>每条新资料分配一台设备。已绑定邮箱或被任务占用的设备会保留给原任务。</small>
   <p id="cloud-run-limit" class="note" role="status"></p>
   <label>${items?'新绑定云手机的联网方式':'云手机联网方式'}<select id="create-network-mode">
@@ -50,9 +49,8 @@ async function openCreate(items=null){
  <p id="desktop-direct-note" class="note" hidden>浏览器直连使用本机出口。要按资料中的国家和州省选择出口，请指定代理来源。</p>
  <label>代理 IP 类型<select id="create-ip-family"><option value="any">不限 IPv4 / IPv6</option><option value="ipv4">只使用 IPv4</option><option value="ipv6">只使用 IPv6</option><option value="dual">IPv4 + IPv6 双栈</option></select></label>
  <label id="cloud-city-policy" hidden>代理城市匹配<select id="create-city-policy">
-  <option value="inherit">新邮箱仅限粘贴城市，已绑定邮箱沿用原设置</option>
-  <option value="city">仅限粘贴城市，找不到则停止</option>
-  <option value="state">允许城市不可用时使用同州 / 省的出口</option>
+  <option value="city">精确到城市（无可用代理则停止）</option>
+  <option value="state">允许同州 / 省退避</option>
  </select></label>
  <p id="proxy-attempt-note" class="note"></p>
  <label class="inline" id="tls-option"><input type="checkbox" id="tls-test">打开 tls.peet.ws，保存到 Excel 后自动关闭检测页</label>
@@ -61,6 +59,8 @@ async function openCreate(items=null){
  <p class="note">${items?'同一邮箱可分别绑定电脑浏览器和云手机。按所选类型复用原环境；该类型尚未绑定时创建，原有另一类型环境继续保留。厂商选择仅用于新建环境。云手机一条邮箱绑定一台已有设备，数量不足时整批提示；关闭时关机并保留设备数据。':'不勾选时关闭后保留浏览器环境，可在“已保留”中继续管理；勾选后确认浏览器关闭就删除厂商环境。云手机关闭时关机，不删除设备。'}</p>
  <p class="note">${items?'邮箱作为窗口名。已打开的环境不重复启动，已关闭的环境使用原配置重新打开。':'本次选择不会改写已保存方案。'}点击下方按钮才开始创建。</p><button class="primary" id="submit-create" ${blocked()?'disabled':''}>${items?'确认打开 '+items.length+' 个邮箱环境':'创建窗口'}</button></div>`,!!items);
  $('#create-kind').value=initialKind;
+ // 旧 inherit 或未知偏好按精确城市处理，不悄悄放宽地区。
+ $('#create-city-policy').value=normalizeCityPolicy(saved.city_policy??saved.allow_city_fallback);
  if(!items)await bindLocation('',saved);
  // 旧版只保存最后一次代理选择，它属于当时选中的环境类型。
  let proxyKind=initialKind;
@@ -86,13 +86,12 @@ async function openCreate(items=null){
   const selectionDisabled=!!items&&(previewPending||previewFailed||newCount()===0);
   $('#create-provider').disabled=selectionDisabled;
   $('#phone-network-options').hidden=desktop||(!!items&&newCount()===0);
-  $('#create-device-scope').disabled=desktop||selectionDisabled;
   $('#create-network-mode').disabled=desktop||selectionDisabled;
   const pastedCloud=!!items&&!desktop;
   $('#cloud-city-policy').hidden=!pastedCloud;
   $('#create-city-policy').disabled=!pastedCloud||previewPending||previewFailed;
   $('#proxy-attempt-note').textContent=pastedCloud
-   ?'每条最多检测 5 次。城市匹配设置会保留到下次打开或重试。'
+   ?'精确城市无可用代理时停止并提示，不自动退到州；只有选择允许同州退避才会放宽。已绑定邮箱保留原设备。'
    :'每条最多检测 5 次。城市不可用时，仅在所选来源支持该州或省的情况下重试。出口地区通过检测后才会启动。';
   $('#tls-option').hidden=!desktop;$('#tls-test').disabled=!desktop;
  };
@@ -231,6 +230,7 @@ async function openCreate(items=null){
    proxy_mode:choice.mode,proxy_sources:choice.sources,[proxyKind+'_proxy_mode']:choice.mode,[proxyKind+'_proxy_sources']:choice.sources,
 		  ip_family:$('#create-ip-family').value,website_test:$('#website-test').checked,tls_test:$('#tls-test').checked,...(items?{}:{cleanup:$('#create-cleanup').checked})};
   if(!$('#create-network-mode').disabled)values.network_mode=$('#create-network-mode').value;
+  if(!$('#create-city-policy').disabled)values.city_policy=$('#create-city-policy').value;
   if(!items)Object.assign(values,{name:$('#create-name').value,count:Math.max(1,Math.min(100,Number($('#create-count').value)||1)),...readLocation()});
   if(items){
    Object.assign(values,{system_family:$('#create-system').value,windows_mode:$('#windows-mode').value});
@@ -245,7 +245,6 @@ async function openCreate(items=null){
  $('#submit-create').onclick=e=>act(async()=>{
   if(items&&(previewPending||previewFailed||blocked()||(systemActive()&&(systemPending||systemFailed||!systemPlan))))throw Error('请等待预览和系统分配完成并处理提示');
   const network=$('#create-network-mode');
-  const deviceScope=$('#create-device-scope');
   const cityPolicy=$('#create-city-policy');
   await api('/runs','POST',{
    kind:$('#create-kind').value,provider:$('#create-provider').value,count:Number($('#create-count').value),
@@ -255,8 +254,8 @@ async function openCreate(items=null){
    website_test:!$('#website-test').disabled&&$('#website-test').checked,tls_test:!$('#tls-test').disabled&&$('#tls-test').checked,
    cleanup:!$('#create-cleanup').disabled&&$('#create-cleanup').checked,
    ...(!network.disabled&&network.value!=='inherit'?{network_mode:network.value}:{}),
-   ...(!cityPolicy.disabled&&cityPolicy.value!=='inherit'?{allow_city_fallback:cityPolicy.value==='state'}:{}),
-   ...(!deviceScope.disabled&&deviceScope.value==='all_idle'?{cloud_device_scope:deviceScope.value}:{}),
+   ...(!cityPolicy.disabled?{allow_city_fallback:cityPolicy.value==='state'}:{}),
+   ...($('#create-kind').value==='phone'?{cloud_device_scope:'all_idle'}:{}),
    ...(items?{items,email_mode:true}:{}),
    ...(systemActive()?{system_selection:systemPlan.selection,system_assignments:systemPlan.assignments}:{})
   });

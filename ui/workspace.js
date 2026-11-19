@@ -146,17 +146,19 @@ function rowValues(r){
 }
 let rowEgressTimer;
 function renderRows(){
+ notifyProxyCityUnavailable(state.rows);
  if(rowEgressTimer){clearTimeout(rowEgressTimer);rowEgressTimer=null}
  const current=state.rows.filter(r=>chromeReadingStatus(r)==='verified');
  if(current.length){
   const next=Math.min(...current.map(r=>r.chrome_egress.expires_at))*1000;
   rowEgressTimer=setTimeout(()=>{if(state.page==='work'&&$('#rows'))renderRows()},Math.max(1,next-Date.now()+1));
  }
-	 const html=state.rows.map(r=>`<tr data-id="${r.id}"><td><input type="checkbox" data-check="${r.id}" ${state.selected.has(r.id)?'checked':''}></td><td data-col="0">${r.number}</td><td data-col="1">${esc(r.name)}<small class="mono">${esc(r.launch)}</small></td><td data-col="2">${esc(r.label)}<small>${typeName(r.kind)}</small></td><td data-col="3">${esc(r.os||'—')}</td><td data-col="4">${esc(r.source||'—')}</td><td data-col="5">${runIPCell(r)}</td><td data-col="6">${r.latency!=null?r.latency+' ms':'—'}</td><td data-col="7"><span class="status ${r.status.includes('failed')?'bad':''}" title="${esc(r.cleanup_error||r.error||'')}">${r.trashed?'已回收':statusNames[r.status]||r.status}</span><small>${esc(r.stage||'')}${r.keep?' · 已保留':''}</small>${r.viewer_status?`<small title="${esc(r.viewer_error||'')}">${esc(r.viewer_status)}</small>`:''}${r.tls_status?`<small title="${esc(r.tls_error||'')}">TLS · ${esc(r.tls_status)}</small>`:''}</td><td class="nowrap"><div class="rowactions">${r.trashed?`<button data-restore="${r.id}">恢复</button><button class="danger" data-purge="${r.id}">彻底删除</button>`:`<button data-copy="${r.id}">复制</button><button data-detail="${r.id}">详细</button><button class="v2" data-v2="${r.id}" ${r.kind!=='desktop'||r.provider==='ruyi'||r.status!=='running'||queryBusy(r)?'disabled title="仅支持运行中的兼容网页环境"':''}>${esc(r.v2||'V2')}</button><button data-open="${r.id}" ${state.runActions?.has(r.id)||!canOpenRun(r)?'disabled':''}>打开</button><button data-retry="${r.id}" ${state.runActions?.has(r.id)?'disabled':''}>${state.runActions?.has(r.id)?'处理中…':'重试'}</button><button class="danger" data-trash="${r.id}" ${state.runActions?.has(r.id)?'disabled':''}>删除</button>`}</div></td></tr>`).join('')||'<tr><td colspan="10"><div class="empty"><strong>没有符合条件的窗口</strong>可调整筛选，或点击右上角创建。</div></td></tr>';
+	 const html=state.rows.map(r=>`<tr data-id="${r.id}"><td><input type="checkbox" data-check="${r.id}" ${state.selected.has(r.id)?'checked':''}></td><td data-col="0">${r.number}</td><td data-col="1">${esc(r.name)}<small class="mono">${esc(r.launch)}</small></td><td data-col="2">${esc(r.label)}<small>${typeName(r.kind)}</small></td><td data-col="3">${esc(r.os||'—')}</td><td data-col="4">${esc(r.source||'—')}</td><td data-col="5">${runIPCell(r)}</td><td data-col="6">${r.latency!=null?r.latency+' ms':'—'}</td><td data-col="7"><span class="status ${r.status.includes('failed')?'bad':''}" title="${esc(r.cleanup_error||r.error||'')}">${r.trashed?'已回收':statusNames[r.status]||r.status}</span><small>${esc(r.stage||'')}${r.keep?' · 已保留':''}</small>${r.viewer_status?`<small title="${esc(r.viewer_error||'')}">${esc(r.viewer_status)}</small>`:''}${r.tls_status?`<small title="${esc(r.tls_error||'')}">TLS · ${esc(r.tls_status)}</small>`:''}</td><td class="nowrap"><div class="rowactions">${r.trashed?`<button data-restore="${r.id}">恢复</button><button class="danger" data-purge="${r.id}">彻底删除</button>`:`<button data-copy="${r.id}">复制</button><button data-detail="${r.id}">详细</button><button data-edit="${r.id}" ${state.demo||state.runActions?.has(r.id)?'disabled':''} title="关闭并清理完成后可修改资料与下次启动设置">编辑</button><button class="v2" data-v2="${r.id}" ${r.kind!=='desktop'||r.provider==='ruyi'||r.status!=='running'||queryBusy(r)?'disabled title="仅支持运行中的兼容网页环境"':''}>${esc(r.v2||'V2')}</button><button data-open="${r.id}" ${state.runActions?.has(r.id)||!canOpenRun(r)?'disabled':''}>打开</button><button data-retry="${r.id}" ${state.runActions?.has(r.id)?'disabled':''}>${state.runActions?.has(r.id)?'处理中…':'重试'}</button><button class="danger" data-trash="${r.id}" ${state.runActions?.has(r.id)?'disabled':''}>删除</button>`}</div></td></tr>`).join('')||'<tr><td colspan="10"><div class="empty"><strong>没有符合条件的窗口</strong>可调整筛选，或点击右上角创建。</div></td></tr>';
  patchRowsHTML(html);
  if(typeof checkProgramRequests==='function')void checkProgramRequests(state.rows);
  $$('[data-check]').forEach(el=>el.onchange=()=>{el.checked?state.selected.add(el.dataset.check):state.selected.delete(el.dataset.check);selectionNote()});selectionNote();
 	 $$('[data-copy]').forEach(el=>el.onclick=()=>act(()=>copy(formatBrief(state.rows.find(r=>r.id===el.dataset.copy)))));$$('[data-detail]').forEach(el=>el.onclick=()=>act(()=>detail(el.dataset.detail)));
+	 $$('[data-edit]').forEach(el=>el.onclick=e=>act(()=>editRun(el.dataset.edit),e.currentTarget));
 	 $$('[data-open]').forEach(el=>el.onclick=e=>act(()=>openOne(el.dataset.open),e.target));
 	 $$('[data-retry]').forEach(el=>el.onclick=e=>act(()=>retryOrOpen(el.dataset.retry),e.target));
 	 $$('[data-trash]').forEach(el=>el.onclick=e=>act(()=>deleteRuns(state.rows.filter(r=>r.id===el.dataset.trash)),e.target));
@@ -285,6 +287,7 @@ function patchRowsHTML(html){
  markCells();
 }
 async function applyRunEvents(data){
+ notifyProxyCityUnavailable((data.events||[]).map(event=>event.row));
  if(data.reset){await updateRunPage();return}
  const changes=new Map(data.events.map(e=>[e.row.id,e.row]));
  const known=new Map(state.rows.map(r=>[r.id,r]));

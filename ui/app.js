@@ -28,7 +28,7 @@ function remember(section,changes,immediate=false){
  preferenceTimer=setTimeout(flushPreferences,350);
 }
 function toast(text){clearTimeout(toastTimer);$('#toast').textContent=text;$('#toast').classList.add('show');toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),5000)}
-async function api(path,method='GET',body){if(state.demo&&(path.startsWith('/runs')||path.startsWith('/run-batch/')))return demoRequest(path,method,body);const control=new AbortController(),timer=setTimeout(()=>control.abort(),240000);try{const res=await fetch('/api'+path,{method,signal:control.signal,headers:{'X-Window-Token':window.API_TOKEN,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});let data;try{data=await res.json()}catch{throw Error('本机服务未返回有效内容（HTTP '+res.status+'）')}if(!res.ok){const error=Error(data.message||JSON.stringify(data.detail||data));Object.assign(error,{code:data.code,provider:data.provider,label:data.label});throw error;}return data}catch(e){if(e.name==='AbortError')throw Error('请求 '+path+' 等待超过 240 秒，请查看日志确认处理结果后再操作');throw e}finally{clearTimeout(timer)}}
+async function api(path,method='GET',body){if(state.demo&&(path.startsWith('/runs')||path.startsWith('/run-batch/')))return demoRequest(path,method,body);const control=new AbortController(),timer=setTimeout(()=>control.abort(),240000);try{const res=await fetch('/api'+path,{method,signal:control.signal,headers:{'X-Window-Token':window.API_TOKEN,...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});let data;try{data=await res.json()}catch{throw Error('本机服务未返回有效内容（HTTP '+res.status+'）')}if(!res.ok){const error=Error(data.message||JSON.stringify(data.detail||data));Object.assign(error,{code:data.code,status:res.status,provider:data.provider,label:data.label});throw error;}return data}catch(e){if(e.name==='AbortError')throw Error('请求 '+path+' 等待超过 240 秒，请查看日志确认处理结果后再操作');throw e}finally{clearTimeout(timer)}}
 async function act(fn,button){if(button)button.disabled=true;try{for(let attempt=0;attempt<15;attempt++){try{return await fn()}catch(e){if(e.code==='PROGRAM_REQUIRED'&&await requestProgram(e))continue;throw e}}}catch(e){toast(e.message);console.error(e)}finally{if(button?.isConnected)button.disabled=false}}
 function head(title,note,action=''){return `<div class="page-head"><div><h1>${title}</h1><p>${note}</p></div>${action}</div>`}
 let dialogOpener=null;
@@ -83,7 +83,18 @@ function field(f,v){
  return `<label class="${['manager_path','browser_path','api_url','remote_api_url','fingerprint_directory','core_root'].includes(f.key)?'wide-field':''}">${name}${input}</label>`;
 }
 function markDirty(){state.dirty=true;state.editRevision=(state.editRevision||0)+1;const el=$('#save-note');if(el)el.textContent='尚未保存'}
-function panelOpen(key,index){return state.preferences.panels?.[key] ?? (index<2)}
+function panelOpen(key,index){return state.preferences.panels?.[key] ?? false}
+function simplifyEnvironment(){
+ const host=$('#provider-form'),advanced=document.createElement('details');
+ advanced.className='environment-advanced';advanced.innerHTML='<summary>高级环境选项（系统、设备筛选等）</summary><p class="note">不展开也会保留原有设置；粘贴新云手机资料固定使用全部空闲设备。</p>';
+ const groups=Array.from(host.querySelectorAll(':scope > details[data-panel]'));
+ for(const group of groups){
+  const name=group.querySelector('summary').textContent;
+  if(name==='连接'){group.open=true;group.classList.add('environment-common');group.querySelector('summary').textContent='常用 · 连接设置'}
+  else advanced.append(group);
+ }
+ if(advanced.querySelector('details'))host.append(advanced);
+}
 function renderProvider(){
  state.editId=state.kind+':'+state.key;
  const p=state.catalog.find(p=>p.key===state.key),groups=[...new Set(p.fields.filter(f=>f.group!=='兼容').map(f=>f.group))];
@@ -98,6 +109,7 @@ function renderProvider(){
 	 bindChoiceFields();
 	 $$('[data-panel]').forEach(el=>el.ontoggle=()=>remember('panels',{[el.dataset.panel]:el.open}));
 	 bindEnvironmentExtras();
+ simplifyEnvironment();
  $('#save-provider').onclick=e=>act(saveProvider,e.target);
  if($('#probe'))$('#probe').onclick=e=>act(async()=>{const editId=state.editId,key=state.key;const result=await api('/providers/'+key+'/probe','POST',{settings:state.doc.settings});if(state.editId!==editId||!$('#probe-result')){toast(result.message);return}$('#probe-result').innerHTML=`<div class="result-box ${result.ok?'':'error'}">${esc(result.message)}</div>`;if(result.devices)renderDevices(result.devices)},e.target);
 }

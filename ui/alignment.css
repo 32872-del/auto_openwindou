@@ -99,3 +99,14 @@ button.help[aria-expanded=true]{background:var(--accent-light);border-color:var(
 .system-settings .note:empty{display:none}
 .system-settings #system-summary{font-size:13px;font-weight:600}
 .system-settings #refresh-systems{justify-self:start}
+
+/* Compact configuration and safe, keyboard-accessible run editing. */
+#run-edit-fields{margin:0;padding:0;border:0;min-width:0}
+#run-edit-form details{padding:12px 0;border-top:1px solid var(--line)}
+#run-edit-form summary{cursor:pointer;font-weight:600;margin-bottom:12px}
+#edit-proxy-sources{border:1px solid var(--line);border-radius:6px;padding:12px;min-width:0}
+#run-edit-fields:disabled{opacity:.65}
+.environment-advanced{margin-top:12px;background:#f7f9f8;border-radius:7px;padding:15px!important}
+.environment-advanced > details{padding:15px 0}
+.environment-common{border-bottom:1px solid var(--line)}
+@media(max-width:640px){#run-edit-form .fields{grid-template-columns:1fr}}
