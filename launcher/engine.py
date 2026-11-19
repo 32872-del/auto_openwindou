@@ -554,38 +554,6 @@ class Engine:
             row=self.store.get_run(identity);row.update(values);self.store.put_run(row)
         return row
 
-    @staticmethod
-    def _compare_egress(report, row):
-        from .cloud_egress_compare import compare_guest_egress
-        if report['status'] == 'mismatch' and row.get('_proxy'):
-            try:
-                report['proxy_comparison'] = compare_guest_egress(report, row['_proxy'], assigned_at=row.get('proxy_assigned_at'))
-            except Exception:
-                report['proxy_comparison'] = {'status': 'inconclusive', 'probes': [], 'summary': '原代理复测未完成'}
-
-    def _compare_chrome_routes(self, reading, row, cloud, checked_at):
-        from urllib.parse import urlsplit
-        from server.python.cloud_phone_s.providers.duoplus.egress import measure_guest, SITES
-        self._compare_egress(reading, row)
-        result = reading.get('proxy_comparison') or {
-            'status': 'inconclusive', 'probes': [], 'summary': '沿用设备代理，没有本机任务代理可供对照'}
-        comparison = {**result, 'page_host': reading['page_host'], 'checked_at': checked_at}
-        if reading['page_host'] == 'ip111.cn':
-            visible = {(p['site'], p['host']) for p in reading['probes'] if p.get('ip')}
-            sites = [(name, url) for name, url in SITES if (name, urlsplit(url).hostname) in visible]
-            if sites:
-                def check():
-                    if self.cancel[row['id']].is_set():
-                        raise InterruptedError('手机正在关闭')
-                try:
-                    shell = measure_guest(cloud.provider.api, cloud.device.id, reading['expected_ip'], check,
-                                          selected_sites=sites)
-                except Exception:
-                    shell = {'method': 'android_https', 'status': 'unavailable', 'probes': [],
-                             'error': '这次设备系统线路复测未完成'}
-                comparison['shell_recheck'] = {**shell, 'checked_at': time.time()}
-        return comparison
-
     def _read_phone_page(self, identity, *, starting=False):
         from server.python.cloud_phone_s.providers.duoplus.egress import read_chrome
         from server.python.cloud_phone_s.duoplus import DuoPlusError
@@ -612,9 +580,6 @@ class Engine:
             failure = '无法读取当前手机画面，请确认设备已开机且 Chrome 检测页位于前台'
         except ValueError as exc:
             failure = str(exc)
-        comparison = None
-        if reading.get('status') == 'mismatch' and not starting:
-            comparison = self._compare_chrome_routes(reading, row, cloud, checked_at)
         with self.lock:
             latest = self.store.get_run(identity)
             if (latest['status'] != required_status or latest.get('launch') != row.get('launch') or
@@ -626,14 +591,6 @@ class Engine:
                 previous = {}
             report = merge_chrome_read(previous, reading,
                 launch=row['launch'], expected=expected, checked_at=checked_at, failure=failure, automatic=starting)
-            if report['status'] == 'mismatch':
-                prior = previous.get('proxy_comparison') or {}
-                newer_same_page = any(p.get('page_host') == reading.get('page_host') and
-                                      p.get('checked_at', 0) > checked_at for p in previous.get('probes', []))
-                if newer_same_page or (prior.get('shell_recheck') and prior.get('page_host') != reading.get('page_host')):
-                    comparison = prior
-                if comparison:
-                    report['proxy_comparison'] = comparison
             self.update(identity, chrome_egress=report)
         return report
 
@@ -841,21 +798,7 @@ class Engine:
 
                 verify_device = key=='duoplus' and (has_region or selected is not None)
                 def verify_guest(device_id, check, switch):
-                    from server.python.cloud_phone_s.providers.duoplus.egress import measure_guest
-                    current = self.store.get_run(identity)
-                    expected = (current.get('vendor_proxy') or {}).get('ip')
-                    report = measure_guest(provider.api, device_id, expected, check)
-                    report['checked_at'] = time.time()
-                    if switch:
-                        report['proxy_switch'] = switch
-                        if switch != 'confirmed':
-                            note = '厂商拒绝启用任务代理' if switch == 'rejected' else '厂商未确认代理开关状态'
-                            report['error'] = '；'.join(filter(None, [report['error'], note]))
-                    self._compare_egress(report, current)
-                    self.update(identity, device_egress=report)
-                    if report['status'] == 'mismatch':
-                        raise ValueError('设备内出口不一致：' + '、'.join(
-                            p['site'] + ' ' + p['ip'] for p in report['probes'] if p.get('ip')))
+                    # 仅保留代理开关校验；不再运行设备命令行出口检测。
                     if switch == 'rejected':
                         raise ValueError('厂商拒绝启用本次任务代理')
                     check()

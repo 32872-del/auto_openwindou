@@ -67,9 +67,9 @@ function chromeReadingStatus(r){
  return status;
 }
 const chromeReadingLabels={
- unread:'尚未读取检测页', verified:'两站已读线路与代理一致', mismatch:'页面出口不一致',
- failed_unread:'启动未完成，本次未读取检测页',cached:'开机页面可能保留旧 IP，请刷新后再读取',
- partial:'页面读数待补全', unavailable:'未能取得页面读数', expired:'上次读数已过期，请重新读取',
+ unread:'', verified:'两站已读线路与代理一致', mismatch:'页面出口不一致',
+ failed_unread:'',cached:'开机页面可能保留旧 IP，请刷新后再读取',
+ partial:'页面读数待补全', unavailable:'', expired:'上次读数已过期，请重新读取',
  past:'历史页面读数，本次待复测', past_mismatch:'历史页面出口不一致，本次待复测'
 };
 function chromeTime(seconds){
@@ -86,26 +86,33 @@ function runIPSource(r){
  if(r.preflight_ip)return '本机代理预检';
  return r.ip?'记录中的代理 IP（来源未记录）':'';
 }
+function hasChromePageReadings(r){
+ return r.chrome_egress?.method==='chrome_page'&&(r.chrome_egress.probes||[]).some(p=>p.ip||p.previous_ip);
+}
 function runIPCell(r){
  if(r.kind==='desktop')return esc(r.ip||'—');
  const source=runIPSource(r);
  if(r.provider!=='duoplus'&&!r.chrome_egress?.status)return esc(r.ip||'—')+(source?`<small>${esc(source)}</small>`:'');
  const status=chromeReadingStatus(r),chrome=r.chrome_egress||{};
- const labels=[`<strong>Chrome · ${esc(chromeReadingLabels[status]||chromeReadingLabels.unavailable)}</strong>`];
- const probes=chrome.probes||[];
+ const hasReadings=hasChromePageReadings(r),label=hasReadings?(chromeReadingLabels[status]||''):'';
+ const labels=label?[`<strong>Chrome · ${esc(label)}</strong>`]:[];
+ const probes=hasReadings?(chrome.probes||[]):[];
  const ips=[...new Set(probes.map(p=>p.ip).filter(Boolean))];
  if(ips.length)labels.push(`<small>页面读数 · ${esc(ips.join(' / '))}</small>`);
  const prior=[...new Set(probes.map(previousChromeReading).filter(Boolean))];
  for(const reading of prior)labels.push(`<small>${esc(reading)}</small>`);
  const reference=r.vendor_proxy?.ip||r.preflight_ip||r.ip;
  if(reference)labels.push(`<small>代理参考 · ${esc(reference)} · ${esc(source)}</small>`);
- if(r.device_egress?.status==='mismatch')labels.push('<small>命令行探测出口不一致</small>');
+
  return labels.join('');
 }
 function phoneEgressResults(r){
- const chrome=r.chrome_egress||{},device=r.device_egress||{},status=chromeReadingStatus(r);
+ const chrome=r.chrome_egress||{},status=chromeReadingStatus(r);
+ if(!hasChromePageReadings(r)){
+  const reference=r.vendor_proxy?.ip||r.preflight_ip||r.ip;
+  return reference?`<section class="noticebox egress-neutral">代理参考 · ${esc(reference)} · ${esc(runIPSource(r))}</section>`:'';
+ }
  const switches={confirmed:'厂商已确认启用',unconfirmed:'厂商未确认启用',rejected:'厂商拒绝启用'};
- const shellStatuses={verified:'已取得命令行探测读数',mismatch:'命令行出口不一致',partial:'已取得部分读数',unavailable:'未能取得读数'};
  function probeList(probes){
   if(!probes?.length)return '';
   return `<ul>${probes.map(p=>{
@@ -115,34 +122,26 @@ function phoneEgressResults(r){
   }).join('')}</ul>`;
  }
  function evidence(report){
-  const comparison=report.proxy_comparison;
-  const comparedAt=comparison?[comparison.page_host,chromeTime(comparison.checked_at)].filter(Boolean).join(' · '):'';
-  const shell=comparison?.shell_recheck;
   return `${report.expected_ip?`<p>比对的代理出口　${esc(report.expected_ip)}</p>`:''}
    ${switches[report.proxy_switch]?`<p>设备代理开关　${switches[report.proxy_switch]}</p>`:''}
    ${probeList(report.probes)}${report.error?`<p>${esc(report.error)}</p>`:''}
-   ${comparison?`<strong>本机经原代理复测</strong>${comparedAt?`<p>对照页面　${esc(comparedAt)}</p>`:''}<p>${esc(comparison.summary)}</p>${probeList(comparison.probes)}`:''}
-   ${shell?`<strong>同次 Android 命令行复测</strong><p>${esc([chromeTime(shell.checked_at),shellStatuses[shell.status]||'未能核实'].filter(Boolean).join(' · '))}</p>${probeList(shell.probes)}${shell.error?`<p>${esc(shell.error)}</p>`:''}`:''}`;
+   `;
  }
  const mismatch=['mismatch','past_mismatch'].includes(status);
  const chromeClass=mismatch?'warningbox':status==='verified'?'':'egress-neutral';
  const stamp=[chrome.page_host,chromeTime(chrome.checked_at)].filter(Boolean).join(' · ');
  return `<section class="noticebox ${chromeClass}">
-  <strong>手机 Chrome 检测页 · ${esc(chromeReadingLabels[status]||chromeReadingLabels.unavailable)}</strong>
+  <strong>手机 Chrome 检测页${chromeReadingLabels[status]?' · '+esc(chromeReadingLabels[status]):''}</strong>
   ${stamp?`<p>最近读取　${esc(stamp)}</p>`:''}
   ${evidence(status==='cached'&&chrome.status!=='cached'?{...chrome,error:''}:chrome)}
   ${chrome.last_read_error&&chrome.last_read_error!==chrome.error?`<p>最近一次读取未完成　${esc(chrome.last_read_error)}</p>`:''}
   ${mismatch?'<p>在同一次开机中分别刷新两个检测页，等各线路显示 IP 后逐页读取，以便核对差异。</p>':''}
- </section>${device.status?`<section class="noticebox ${device.status==='mismatch'?'warningbox':'egress-neutral'}">
-  <strong>Android 命令行参考 · ${esc(shellStatuses[device.status]||'未能核实')}</strong>
-  ${device.checked_at?`<p>探测时间　${esc(chromeTime(device.checked_at))}</p>`:''}
-  ${evidence(device)}
- </section>`:''}`;
+ </section>`;
 }
 function rowValues(r){
  const chrome=r.chrome_egress||{},status=chromeReadingStatus(r);
- const readings=(chrome.probes||[]).map(p=>[p.site||p.host,p.ip||p.error||'未取得 IP',chromeTime(p.checked_at),p.automatic?'开机时读取已有页面':'',previousChromeReading(p)].filter(Boolean).join(' '));
- return [r.number,r.name,r.launch,typeName(r.kind),r.label,r.os||'',r.source||'',r.ip||'',r.protocol||'',r.latency??'',r.trashed?'已回收':statusNames[r.status]||r.status,runIPSource(r),r.provider==='duoplus'?(chromeReadingLabels[status]||chromeReadingLabels.unavailable):'',readings.join(' / ')];
+ const readings=(hasChromePageReadings(r)?(chrome.probes||[]):[]).map(p=>[p.site||p.host,p.ip||p.error||'未取得 IP',chromeTime(p.checked_at),p.automatic?'开机时读取已有页面':'',previousChromeReading(p)].filter(Boolean).join(' '));
+ return [r.number,r.name,r.launch,typeName(r.kind),r.label,r.os||'',r.source||'',r.ip||'',r.protocol||'',r.latency??'',r.trashed?'已回收':statusNames[r.status]||r.status,runIPSource(r),r.provider==='duoplus'&&hasChromePageReadings(r)?(chromeReadingLabels[status]||''):'',readings.join(' / ')];
 }
 let rowEgressTimer;
 function renderRows(){
