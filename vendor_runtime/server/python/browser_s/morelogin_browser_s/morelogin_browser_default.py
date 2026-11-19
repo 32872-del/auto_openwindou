@@ -1,0 +1,44 @@
+"""MoreLogin 安全默认值和官方固定信息。"""
+
+MORELOGIN_BROWSER_KEY = "morelogin"
+MORELOGIN_BROWSER_NAME = "MoreLogin"
+MORELOGIN_BROWSER_PROCESS = "MoreLogin"
+
+MORELOGIN_REQUEST_TIMEOUT = 30.0
+MORELOGIN_START_TIMEOUT = 120.0
+
+MORELOGIN_CREATE_PATH = "/api/env/create/advanced"
+MORELOGIN_UPDATE_PATH = "/api/env/update"
+MORELOGIN_LIST_PATH = "/api/env/page"
+MORELOGIN_DETAIL_PATH = "/api/env/detail"
+MORELOGIN_START_PATH = "/api/env/start"
+MORELOGIN_STOP_PATH = "/api/env/close"
+MORELOGIN_DELETE_PATH = "/api/env/removeToRecycleBin/batch"
+MORELOGIN_HEALTH_PATH = "/api/env/advanced/ua/versions"
+MORELOGIN_GROUP_LIST_PATH = "/api/envgroup/page"
+MORELOGIN_GROUP_CREATE_PATH = "/api/envgroup/create"
+
+MORELOGIN_OS_IDS = {
+    "win": 1,
+    "mac": 2,
+    "android": 3,
+}
+
+__all__ = [
+    "MORELOGIN_BROWSER_KEY",
+    "MORELOGIN_BROWSER_NAME",
+    "MORELOGIN_BROWSER_PROCESS",
+    "MORELOGIN_CREATE_PATH",
+    "MORELOGIN_DELETE_PATH",
+    "MORELOGIN_DETAIL_PATH",
+    "MORELOGIN_GROUP_CREATE_PATH",
+    "MORELOGIN_GROUP_LIST_PATH",
+    "MORELOGIN_HEALTH_PATH",
+    "MORELOGIN_LIST_PATH",
+    "MORELOGIN_OS_IDS",
+    "MORELOGIN_REQUEST_TIMEOUT",
+    "MORELOGIN_START_PATH",
+    "MORELOGIN_START_TIMEOUT",
+    "MORELOGIN_STOP_PATH",
+    "MORELOGIN_UPDATE_PATH",
+]

@@ -1,0 +1,30 @@
+"""O 浏览器安全默认值和官方固定信息。"""
+
+O_BROWSER_KEY = "octo"
+O_BROWSER_NAME = "O指纹浏览器"
+O_BROWSER_PROCESS = "Octium"
+
+O_REMOTE_API_URL = "https://app.octobrowser.net/api/v2/automation"
+O_REQUEST_TIMEOUT = 30.0
+O_START_TIMEOUT = 120.0
+O_STOP_TIMEOUT = 8.0
+
+# 官方文档明确给出的请求成本。账号具体 RPM/RPH 必须读取响应头，不能猜。
+O_START_REQUEST_COST = 1
+O_STOP_REQUEST_COST = 1
+O_FORCE_STOP_REQUEST_COST = 2
+O_ONE_TIME_REQUEST_COST = 4
+
+__all__ = [
+    "O_BROWSER_KEY",
+    "O_BROWSER_NAME",
+    "O_BROWSER_PROCESS",
+    "O_FORCE_STOP_REQUEST_COST",
+    "O_ONE_TIME_REQUEST_COST",
+    "O_REMOTE_API_URL",
+    "O_REQUEST_TIMEOUT",
+    "O_START_REQUEST_COST",
+    "O_START_TIMEOUT",
+    "O_STOP_REQUEST_COST",
+    "O_STOP_TIMEOUT",
+]

@@ -1,0 +1,485 @@
+[
+  {
+    "path": "server\\python\\driver_s\\drission_s\\stealth_module_s\\config.py",
+    "sha256": "26d1553f2299e97fb171126dbc46b10228e9d1de986ce0e2d642e80bed73339d"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\native_session.py",
+    "sha256": "d0592cc20bcc8fb0a1dc62d9217e445b9618d59b91d420dd555b67a996ad0854"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\foreground_input.py",
+    "sha256": "fd615a6d41ba3fa4f1083c70e685d64b2c36193b7868ebad3c673fe05c8e00c6"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\mobile_motion.py",
+    "sha256": "9bf75378865b403bd9fb767f8472a127b0477a1fd7d91ac05f0acb882a1e26d3"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\foreground_recovery.py",
+    "sha256": "ea2366b4e6c6a47c4f82d32f225840bd16690be9a2fb832d962ad590b9fb7bc1"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\win32_native.py",
+    "sha256": "35242bb65ccd5170a2606d538d4c7d275b8a81b3013345aa632f95baee9bc3ec"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\cursor_trajectory.py",
+    "sha256": "3bae822354b5c18dd18790eb11ba87424b1e4caff6825f9c20df27420d770db3"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\cursor_state_hook.py",
+    "sha256": "bd838f3961f43df4588ae83229fe5ca2a474a461a3f0d15affffea565fbaa2e5"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\dpi_context.py",
+    "sha256": "77326dfffff61452e7855aa6c274bc42124288cb5ce80a64af4629ba29f982cd"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\coordinate_transform.py",
+    "sha256": "5beb5e7880373497e83e8193e65c8cf4a4a5825726a3d741dc29035c4f708544"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\background_input.py",
+    "sha256": "3904f1835493b404e96d527a6ee3ad32b6627c042407e1f5326b95850d2b071b"
+  },
+  {
+    "path": "server\\python\\driver_s\\win32_dp_module_s\\cursor_overlay.py",
+    "sha256": "6299708f68642750e7d05b8f880f9824b71fa0f90e1a11fbe0f35eb9193f795f"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_window.py",
+    "sha256": "e6a815a78cd4164b13337a9b1923aa2cc3877ea35662c50af16329aa3aada83d"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_region_capture.py",
+    "sha256": "04439f905abd8abd12f6dbac0757840f3c6ccaa64c8005e4355b1afc8575d5cd"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\framework\\settings.py",
+    "sha256": "1c07f04da92cc0204d45a397964d30a56f2e00cce1960d92bb8a2242ef5e2ce0"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\framework\\contracts.py",
+    "sha256": "db91f009eb9e5e8a952f6a4e647c788de33d271ae9a891b8141dd6bdafb7aaa0",
+    "previous_sha256": "78a08ac2d3e417e1cfc926125e6eb1d56af0979b1096db8fa19643e3e7e12193"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\framework\\android.py",
+    "sha256": "53a991360f79444f8288e9f1ef72139d0a0e73a42b059643c0cd173c1e3dbc09"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\framework\\lifecycle.py",
+    "sha256": "c3f337ffefac33ae3061bf99d4e60ba3051fc6a87d4cf5ee9eb2fbe990270bbd",
+    "previous_sha256": "7d110d0f47bfa6e9710e60106ad072794e38a06de773f9f7b82cbe01b3cc47eb"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\framework\\device_pool.py",
+    "sha256": "02a31463dbaead8f5c9bfbafa18eeb63cf24bd0af543437d52f5dec946de0ddb",
+    "previous_sha256": "223fe055607ba99905c6c19119b270a39e431a16a3985006cec95b9a4db455f6"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\providers\\geelark\\adapter.py",
+    "sha256": "f2de03ceff81de41fe43d35bbb753f81390e20dca33210f81ff5d4cf3da160f0",
+    "previous_sha256": "2acd6e33ec057a5c2c56ec2f53040a62ad1a2ecd7545679209b5b97e9ba5a1db"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\providers\\geelark\\viewer.py",
+    "sha256": "1dc95aba356ea6be5a16e264598d06bd18da989efece1469daf6e0301f449af1"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\framework\\navigation.py",
+    "sha256": "7a175fd017b0bf25e0c52acedf5e4387885635836e988990ac169bcd2460213b"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\framework\\touch_window.py",
+    "sha256": "ff64ac7e5096e89576240c5c7693c9f35373f0cf8f3d02d92a0c907e200ced11"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\isolated_viewer.py",
+    "sha256": "acd3e0f4805de7be30525a7413635cfcaafc7810f6132fd2125c8f1cdbea0a51"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\desktop_window.py",
+    "sha256": "0b5670b3c1afa9b49c973cd6b636fa1e5d8d34ba7fd63836a5de8a0dfc8b3478"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\providers\\geelark\\api.py",
+    "sha256": "5f08106596c8aba18d0f085b96f8227a5b428566c38b80d96b3b7df0d38fed9d",
+    "previous_sha256": "2a46f511934afb4cb6cf7cdcfc3c3273f8f8fcdcdddb99501f74271bb46e5bac"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\providers\\duoplus\\adapter.py",
+    "sha256": "1063f144d15120ebb11530da82c1ebbc6832be13ed04851f73c821b66cc5d9ef",
+    "previous_sha256": "d0f22dd3ed5d19f64eab71d1f86f4f21b25c889326096bb6ae99219954d71f9c"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\providers\\duoplus\\owned_proxy.py",
+    "sha256": "e748ca517489e90302221c0d313831834fb733a327d2305515a537a5d4ca991e"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\isolated_window.py",
+    "sha256": "d51644275582a8ad019e40a280e3f947cd547adc604e88d2bb0621822c945704"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\duoplus.py",
+    "sha256": "5c50b248458da3de2db98fd34814e8c55a8764b5d6d84eeebc1e50e800ce31f7"
+  },
+  {
+    "path": "server\\python\\cloud_phone_s\\providers\\__init__.py",
+    "sha256": "c6c47cc12f74dd3e05569668f3d3b4dbab38245f0105393c4ce06eb38b825871"
+  },
+  {
+    "path": "server\\python\\browser_s\\desktop_launch_bridge_module_s\\coordinator.py",
+    "sha256": "0b94d4f518f2a6e54d9d989dd72387cf814ad10e51166c3da7f6e4117e393b5a"
+  },
+  {
+    "path": "server\\python\\browser_s\\desktop_launch_bridge_module_s\\providers.py",
+    "sha256": "1bd85aa070251b8bf1f3f7a2a7149c20fc0408343213ba40334b0e91d77f3205"
+  },
+  {
+    "path": "server\\python\\browser_s\\desktop_launch_bridge_module_s\\model.py",
+    "sha256": "02b858a92d6f47cf46fc074f7ef9311a257cd5ece73c5d8923b3eb70eca0d348"
+  },
+  {
+    "path": "server\\python\\browser_s\\desktop_launch_bridge_module_s\\native_bridge.py",
+    "sha256": "c2812144ebf60053119536de84bf4da3d274c247463aef1884074c18ed197378"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_fingerprint.py",
+    "sha256": "21db462992772a8f54225b2ad3e2f8fd4379d8b48b3394526525ed40a80b0808",
+    "previous_sha256": "4c59d332c75cebd73012aa1263933e5370681f8c423766034c2953fdcae4c35d"
+  },
+  {
+    "path": "server\\python\\browser_s\\o_browser_s\\o_browser_device.py",
+    "sha256": "08c4066e5768fc997337087d7d2dee1ace478bf9e018a47a3fb8966349849230"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_task_setting.py",
+    "sha256": "f13d74a7ee5f7529204993aa80862db6f1d131f461ae24b36822167c685eeffc"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_factory.py",
+    "sha256": "1cb783b28f1b2073eafd91585aa357c44cc18c171e35b628a11ab8407ce90380"
+  },
+  {
+    "path": "server\\python\\browser_s\\vmlogin_browser_s\\vmlogin_browser_runtime_setting.py",
+    "sha256": "25f1b60f1690640130eaff9b53454a1306cd7f4eafe54228ee4c8c27b67f7848"
+  },
+  {
+    "path": "server\\python\\browser_s\\vmlogin_browser_s\\vmlogin_browser_default.py",
+    "sha256": "06047cdbb2c9e7fbc3bd8c513c4862590707e3b3ef6737df3e983ef8cac5bfb8"
+  },
+  {
+    "path": "server\\python\\browser_s\\vmlogin_browser_s\\vmlogin_browser.py",
+    "sha256": "7ae01bb9c545bac784c29302f69f5510708b95b07e7a85972dd7c8925b2cbd35"
+  },
+  {
+    "path": "server\\python\\browser_s\\vmlogin_browser_s\\vmlogin_browser_error.py",
+    "sha256": "c410ac7d5fca7e7e93a1ccc11ef452d057acb30cca89c23b6e6a957a5d5512e4"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_http.py",
+    "sha256": "a944850d37acb8ea00fc5dfc63b34fd94e3c2ec0bf5926dca4fa1fcd35b2f8d1"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_error.py",
+    "sha256": "c83d46bd941be44200d93ddc8c4429321878dbd5ded2442637d12cd3f20c89e0"
+  },
+  {
+    "path": "server\\python\\browser_s\\vmlogin_browser_s\\vmlogin_browser_api.py",
+    "sha256": "5e13c4bd9d5528a06ec2add7b4628c22ee54c56e9aab71361a98a657c4a44dcc"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_limit.py",
+    "sha256": "d7f596fb838abcdaccc35a80be94503aa2a7f609a15143ebe8553c740238eda3"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_info.py",
+    "sha256": "9780d93fe882a687787f49453bdcc610163b589cf6d14e54e708d21c5dc3674f"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_base.py",
+    "sha256": "4c544800e8933f6e7c15e90126eaf4fb2493361e980953656e28a59dc7c16745"
+  },
+  {
+    "path": "server\\python\\browser_s\\u_browser_s\\u_browser_runtime_setting.py",
+    "sha256": "2cd9fcf371ff7018fa2aaa14ac0a665fcc3e42a01129d96dc8e983f9b5a0e04f"
+  },
+  {
+    "path": "server\\python\\browser_s\\u_browser_s\\u_browser_default.py",
+    "sha256": "f82a8f8ab4cf6eab863f389c11e2b12ce2ecae717abeab339954ac63102fc24a"
+  },
+  {
+    "path": "server\\python\\browser_s\\u_browser_s\\u_browser.py",
+    "sha256": "9df6876bb727b230baf05269294322d657f92c55c1145c27314e4d07ced2fb0b",
+    "previous_sha256": "24f6c0721df97714c20751543d50411cb600953143b836d880766c0f9a4fd7fd"
+  },
+  {
+    "path": "server\\python\\browser_s\\u_browser_s\\u_browser_error.py",
+    "sha256": "53cc1d56cecbfaefae9ce1f205306e06b0d59088cbdf70b0c3ef6f2e35447fc4",
+    "previous_sha256": "29c4e4882a33c7a884e070bcb0a6f81df6cefabc216c28c906dfb4442a4f2427"
+  },
+  {
+    "path": "server\\python\\browser_s\\u_browser_s\\u_browser_api.py",
+    "sha256": "1c9612b5840eca60be2af988e8224d6f2ec5afca89a1d096739f459652449f60"
+  },
+  {
+    "path": "server\\python\\browser_s\\ruyi_browser_s\\ruyi_browser_runtime_setting.py",
+    "sha256": "7350e330aaa5ef3978e8ba587db29d755ebdfe3f056547ebc5449150325ea00c"
+  },
+  {
+    "path": "server\\python\\browser_s\\ruyi_browser_s\\ruyi_browser_default.py",
+    "sha256": "276beb57ca906ede56e8b32bd38224a2fdbfdc5fb7c5e63c7d5d36ea723b19b6"
+  },
+  {
+    "path": "server\\python\\browser_s\\ruyi_browser_s\\ruyi_browser.py",
+    "sha256": "ea37ce14bed80f4ada1ffa6e0e6d151013d5a4494b93c3a300ee2346cd59d224"
+  },
+  {
+    "path": "server\\python\\browser_s\\ruyi_browser_s\\desktop_process.py",
+    "sha256": "5ec94524a1efa016c140164b28fa2e8289dd87d82b104abc79d1728cea28ede4"
+  },
+  {
+    "path": "server\\python\\browser_s\\desktop_launch_bridge.py",
+    "sha256": "c5fdeb5c85ba9a90edd9a012e62b00b6a79f809296ba9d9f68f87e732f887039"
+  },
+  {
+    "path": "server\\python\\browser_s\\desktop_launch_bridge_module_s\\__init__.py",
+    "sha256": "2b7cc3ae567e7295fe56ee5fbd36d067ec3776d1dab3de202897483b4df014c2"
+  },
+  {
+    "path": "server\\python\\browser_s\\ruyi_browser_s\\ruyi_browser_probe.py",
+    "sha256": "a17656f0d0363ff3d53ac966654c69e3599fbe0148b552c256c34721485c2575"
+  },
+  {
+    "path": "server\\python\\browser_s\\ruyi_browser_s\\ruyi_browser_fingerprint.py",
+    "sha256": "c209b7925ffd9a69ed1599ea642f6a701b786f185ca4530d6b224c1d24208f09"
+  },
+  {
+    "path": "server\\python\\browser_s\\ruyi_browser_s\\ruyi_browser_fingerprint_default.py",
+    "sha256": "1cebaa2da3fb20100021d10e82e60665cc10eab6d352dc6b8843ecca83bed52f"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_cache.py",
+    "sha256": "8f509d03f9aff2821ba1faea8275dd34f61c966ef118af96bd14b474ab7d9c4c"
+  },
+  {
+    "path": "server\\python\\browser_s\\o_browser_s\\o_browser_runtime_setting.py",
+    "sha256": "ac0f6765d249b4833e14cb8455b215198514f94b3e1199c9ab3026f8ef9cb74b"
+  },
+  {
+    "path": "server\\python\\browser_s\\o_browser_s\\o_browser_default.py",
+    "sha256": "dd0b86ab8b7212596e339c05484599985b46b824fb45b2ea06c79a63c022f969"
+  },
+  {
+    "path": "server\\python\\browser_s\\o_browser_s\\o_browser.py",
+    "sha256": "8d993c620f3cec3d0c26b4caecc6281514e268ad9b823fceae11c70d0e8faab9"
+  },
+  {
+    "path": "server\\python\\browser_s\\o_browser_s\\o_browser_error.py",
+    "sha256": "8006ea33cfef1ba816eadf97b62e4cef2ffc67d9c78ac773cae2d315740b9d8c"
+  },
+  {
+    "path": "server\\python\\browser_s\\o_browser_s\\o_browser_api.py",
+    "sha256": "2f778145ed4db45b72f2f23da1a57faf68cdbe951ca714664178fad51ab7a99a"
+  },
+  {
+    "path": "server\\python\\browser_s\\morelogin_browser_s\\morelogin_browser_runtime_setting.py",
+    "sha256": "25917461a243c1488188a1e36d24f3e372f290c1f6aa70081510af58b51aa40e"
+  },
+  {
+    "path": "server\\python\\browser_s\\morelogin_browser_s\\morelogin_browser_default.py",
+    "sha256": "603f8434cf54e158d5c7b74634243bc55e363c131249a920c3e44fcca607d622"
+  },
+  {
+    "path": "server\\python\\browser_s\\kameleo_browser_s\\kameleo_browser_runtime_setting.py",
+    "sha256": "e8b4c22879793993ea9351b7334a466b1c5866728becedb9e52df4064fd569fa"
+  },
+  {
+    "path": "server\\python\\browser_s\\kameleo_browser_s\\kameleo_browser.py",
+    "sha256": "45052a48937861d45bba20e2b98bcb26bc0cdfb6b42db0ac1807e1f543596cb0"
+  },
+  {
+    "path": "server\\python\\browser_s\\kameleo_browser_s\\kameleo_browser_api.py",
+    "sha256": "54c8752f7dc0d511e12db595997cec2566b27fe73f1bb9742ef166af47281094"
+  },
+  {
+    "path": "server\\python\\browser_s\\morelogin_browser_s\\morelogin_browser.py",
+    "sha256": "bcd5a6b360256f81ac1429e3324885aa81c424f42ff232e5708082ce130aed7d"
+  },
+  {
+    "path": "server\\python\\browser_s\\morelogin_browser_s\\morelogin_browser_error.py",
+    "sha256": "8f05caff9198d68fc89b4c8eaa36b9574307bc11e2140ae986b56c0fe1ce305a"
+  },
+  {
+    "path": "server\\python\\browser_s\\morelogin_browser_s\\morelogin_browser_api.py",
+    "sha256": "7f17ce5bd1708b93fcc9f68f5d924e6796113e002796b7114cea91091ee1a9bb"
+  },
+  {
+    "path": "server\\python\\browser_s\\hub_browser_s\\hub_browser_runtime_setting.py",
+    "sha256": "26a9289d2c0dcc00708b6e18851108f498c388a0a4b7949b43b7ffc5f647df3a"
+  },
+  {
+    "path": "server\\python\\browser_s\\hub_browser_s\\hub_browser_default.py",
+    "sha256": "4077d7cf3219f3c5ef5beb24a0b0d194da5ad6950406196484043a1e37aec1ee"
+  },
+  {
+    "path": "server\\python\\browser_s\\hub_browser_s\\hub_browser.py",
+    "sha256": "16396d92009b5f28c59ec317166ee6dc00dd14a6f9b6d98778864bbbcf2bedbb"
+  },
+  {
+    "path": "server\\python\\browser_s\\hub_browser_s\\hub_browser_error.py",
+    "sha256": "4fceea21b355fb4710c961f516036760fc51f4dcfdec6c91767ac7a0e001d0ea"
+  },
+  {
+    "path": "server\\python\\browser_s\\hub_browser_s\\hub_browser_api.py",
+    "sha256": "7a72c8856b345ac8b3ee7e312f948c5bdc62cd8a98f396806cd96b8d01d3dd8c"
+  },
+  {
+    "path": "server\\python\\browser_s\\helix_browser_s\\helix_browser_runtime_setting.py",
+    "sha256": "ff84a824c2c0d97bf12255649f5fa92695238a4c8740937ef78cf38821555495"
+  },
+  {
+    "path": "server\\python\\browser_s\\helix_browser_s\\helix_browser_default.py",
+    "sha256": "e74893863d0312187781d0b2c14d78c920db131a55f474acf9412608b3584289"
+  },
+  {
+    "path": "server\\python\\browser_s\\helix_browser_s\\helix_manager.py",
+    "sha256": "4dd1f0521b3e04f25791a5a212a6377c0575c7089250cc5c888efcbfabaad8d0"
+  },
+  {
+    "path": "server\\python\\browser_s\\helix_browser_s\\helix_browser.py",
+    "sha256": "960dff654054c729613a3badab159d050cf7e1a78d4c1fffda1dcb3520cf0aea"
+  },
+  {
+    "path": "server\\python\\browser_s\\hidemium_browser_s\\hidemium_browser_runtime_setting.py",
+    "sha256": "9164de0dfe21bc83792fe5accdd4ceedb71498189d7931f4b64dcf14ef91e3cb"
+  },
+  {
+    "path": "server\\python\\browser_s\\hidemium_browser_s\\hidemium_browser_default.py",
+    "sha256": "96011bade36f68f518fcfa1cbbb86d3834512f05d409a96a7edf96e0f3e66981"
+  },
+  {
+    "path": "server\\python\\browser_s\\hidemium_browser_s\\hidemium_browser.py",
+    "sha256": "a77e608eea9d3bb4b378bb98b639e755bcf8b05ad5d9de137bd4c6e04f529363"
+  },
+  {
+    "path": "server\\python\\browser_s\\hidemium_browser_s\\hidemium_browser_error.py",
+    "sha256": "8c9ddeb8476da16eee08d946619f41358614ddb4e222918a977897c32bcef0ad"
+  },
+  {
+    "path": "server\\python\\browser_s\\hidemium_browser_s\\hidemium_browser_api.py",
+    "sha256": "8583fa5017d8446aa15ccd4dac7894a5469b5b4df3cd269e781e7e434105556b"
+  },
+  {
+    "path": "server\\python\\browser_s\\browser_module_s\\browser_catalog.py",
+    "sha256": "000537751efad9dfa9848c26cc1f634436582885d39b0a3fb1e520018b4a7547"
+  },
+  {
+    "path": "server\\python\\browser_s\\chrome_browser_s\\chrome_browser_runtime_setting.py",
+    "sha256": "96db92d08b28f8805366e523748399e94d2bbdeb0741a678999125a76cf8c9fe"
+  },
+  {
+    "path": "server\\python\\browser_s\\chrome_browser_s\\chrome_browser_default.py",
+    "sha256": "7589367d4ab857763ebb6cc0b74a6be154a589f72f5bd0eab39028e8ecfccb43"
+  },
+  {
+    "path": "server\\python\\browser_s\\chrome_browser_s\\chrome_browser.py",
+    "sha256": "5645563b6cefa6a887b40b5b45208e38b282b2b464b747de26510e1a32cb0467"
+  },
+  {
+    "path": "server\\python\\browser_s\\chrome_browser_s\\chrome_browser_connection.py",
+    "sha256": "33455c8f6d0f6dc4f1912db2baee8c806aa960c1307ea7d8ff32db8736868021"
+  },
+  {
+    "path": "server\\python\\browser_s\\chrome_browser_s\\chrome_browser_probe.py",
+    "sha256": "b88bd414a53fdf07c294bd790e0389d35a86150178fe2277d9ad5e984f9a916f"
+  },
+  {
+    "path": "server\\python\\browser_s\\bit_browser_s\\bit_browser_runtime_setting.py",
+    "sha256": "6d824ea6273de3b341210f2477f8b0ea9aea88d139b6fc3414a903b755f721ae"
+  },
+  {
+    "path": "server\\python\\browser_s\\bit_browser_s\\bit_browser_default.py",
+    "sha256": "11c923cbb5e03501f69bd54dc032799ba2b6a035880d215ffe580c590d09dba0"
+  },
+  {
+    "path": "server\\python\\browser_s\\bit_browser_s\\bit_browser.py",
+    "sha256": "895c1d9cb074ab83f56929d85b9d1ee2960f3ec386a9947057978612a8bf9d14"
+  },
+  {
+    "path": "server\\python\\browser_s\\bit_browser_s\\bit_browser_error.py",
+    "sha256": "309f4fa35b5ae09473530fc69ff03bfbd08bfd35dc8d76a6fdcb57289c7e48b5"
+  },
+  {
+    "path": "server\\python\\browser_s\\bit_browser_s\\bit_browser_api.py",
+    "sha256": "39e7ef462f18fa1eb09f7e83de044f32834f10050f895fc6f22dcff4e5491763"
+  },
+  {
+    "path": "server\\python\\browser_s\\adspower_browser_s\\adspower_browser_runtime_setting.py",
+    "sha256": "eb890a8df6f386d3fc1fd7c1ad682e62bfd61d1fe300b21da362fc576ebc1e9e"
+  },
+  {
+    "path": "server\\python\\browser_s\\adspower_browser_s\\adspower_browser_default.py",
+    "sha256": "16bc99fc0aa97d7ad8291b0417c6022301ad4bfee322f670073445a4e2415e40"
+  },
+  {
+    "path": "server\\python\\browser_s\\adspower_browser_s\\adspower_browser.py",
+    "sha256": "1d8ae20d569149b3a8fce96e5a08024c361ddb9eb15ff7511a8396a49e343d4c",
+    "previous_sha256": "310a811c431414fb41ee442efedaca68372c1d7e5c8d2ac0ae20f4e7b8c416af"
+  },
+  {
+    "path": "server\\python\\browser_s\\adspower_browser_s\\adspower_browser_error.py",
+    "sha256": "da32b59c5138f8c1fe8fccc9ae4bb099578b9c402053013be281fdeb0ad9a777"
+  },
+  {
+    "path": "server\\python\\browser_s\\adspower_browser_s\\adspower_browser_api.py",
+    "sha256": "48cc4af88cf304ff09a41daa0a01c518ce8a2ea2e0dc2956b09045c2cc087d74"
+  },
+  {
+    "path": "server/python/driver_s/driver_module_s/driver_error.py",
+    "sha256": "927a8823382287cc59ec9ce308269bdc797aebb40ce45a6ffd7e6e5c00f054b4"
+  },
+  {
+    "path": "server/python/driver_s/errors.py",
+    "sha256": "23f3246c2d4f878b7644afba06936b9abca779636ebb304b52b4fb4e7d0778b4"
+  },
+  {
+    "path": "server/python/runtime_s/native_library.py",
+    "sha256": "ea775bd3ebfad6a8242827c3e8ebd356a79e72ceab2287c9b24cffc0466b42a7"
+  },
+  {
+    "path": "server/python/runtime_s/desktop_scope.py",
+    "sha256": "5fab9b1bf3ac0e93afb02e7afc0bd58c1bbec86f030203270be62dd609ecf957"
+  },
+  {
+    "path": "server/python/driver_s/win32_dp_module_s/win32_native.py",
+    "sha256": "35242bb65ccd5170a2606d538d4c7d275b8a81b3013345aa632f95baee9bc3ec"
+  },
+  {
+    "path": "server/python/browser_s/desktop_launch_bridge_module_s/native/bin/x64/desktop_launch_hook.dll",
+    "sha256": "c9a1dccc3cc59c689cf191fd56a8cd7ce05e64b7c2453cdefce70a99290a2714"
+  },
+  {
+    "path": "server/python/driver_s/win32_dp_module_s/native/bin/x64/cursor_state_hook.dll",
+    "sha256": "760410acb1832fdf25e2a072824d1ead26767bebfbaeed585035f603eb3a5087"
+  },
+  {
+    "path": "server/python/browser_s/browser_module_s/browser_options_catalog.py",
+    "sha256": "857c48b2d2937129ddf400a23ad7f6d578ce7e92c7deb1886741d87e54eb8655"
+  },
+  {
+    "path": "server/python/browser_s/browser_module_s/browser_program.py",
+    "sha256": "c621c63df1a220badd4c2386d323cd3d6b0de162876b06331d214f79a50ff631"
+  },
+  {
+    "path": "server/python/cloud_phone_s/framework/device_catalog.py",
+    "sha256": "2f7b36d87948d4c47fd7d01344494dae2440fe680be4bf3f2f9f31a2e2445040",
+    "local_change": "2026-09-26：型号读取接入新版持久缓存回调；显式换机仍实时校验目录。"
+  },
+  {
+    "path": "server/python/utils_s/process_utils.py",
+    "sha256": "98145bb25eabc769c55f0eee7b8598386b066e00cf77d7a312b67ee99ff231aa"
+  }
+]
