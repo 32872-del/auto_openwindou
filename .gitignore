@@ -1,0 +1,40 @@
+# Local configuration, credentials, and runtime data.
+# These are created beside the program and must stay out of the repository.
+通用配置/
+专属配置/
+.env
+.env.*
+*.pem
+*.key
+**/私有快照/
+**/config.json
+
+# Virtual environments
+.venv/
+venv/
+
+# Release artifacts and packaging output
+发布/
+交付补丁/
+dist/
+build/
+*.exe
+
+# Historical backups and runtime snapshots
+backups/
+**/ui-source.zip
+*.bak
+*.snapshot
+
+# Python caches and logs
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.log
+logs/
+
+# Local IDE metadata
+.idea/
+
+# vendor_runtime/ (including its Python modules and authorized DLLs)
+# and the pure test scripts under _测试/ are source and are intentionally tracked.

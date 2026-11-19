@@ -1,0 +1,17 @@
+"""Helix 浏览器的固定名称和默认连接参数。"""
+
+HELIX_BROWSER_KEY = "helix"
+HELIX_BROWSER_NAME = "Helix 浏览器"
+HELIX_BROWSER_PROCESS = "helix.exe"
+HELIX_LOCAL_API_URL = "http://127.0.0.1:58888"
+HELIX_CORE_FAMILY = "chromium"
+HELIX_CORE_VERSION = "149.0.7827.156"
+
+__all__ = [
+    "HELIX_BROWSER_KEY",
+    "HELIX_BROWSER_NAME",
+    "HELIX_BROWSER_PROCESS",
+    "HELIX_CORE_FAMILY",
+    "HELIX_CORE_VERSION",
+    "HELIX_LOCAL_API_URL",
+]

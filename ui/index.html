@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>自动创建窗口</title><link rel="stylesheet" href="/ui/style.css"><link rel="stylesheet" href="/ui/prototype.css"><link rel="stylesheet" href="/ui/alignment.css"></head>
+<body>
+<aside class="sidebar"><div class="brand"><b class="brand-logo">▤</b><div>自动创建窗口<small>WINDOW STUDIO</small></div></div><div class="navcaption">工作空间</div><nav class="nav">
+<button class="active" data-page="work">▦　创建与运行</button><button data-page="environment">▱　环境方案</button><button data-page="proxy">⌘　代理来源</button><button data-page="records">▤　检测记录</button><button data-page="settings">☷　系统设置</button>
+</nav><footer><span id="alias">本机工作空间</span><small>设置与记录保存在软件目录</small><button id="logs">操作日志　↗</button></footer></aside>
+<div class="shell"><header class="topbar"><span id="breadcrumb">创建与运行</span><div><span class="badge">新版 · 开发验证版</span><button id="feature-list">查看功能清单</button><button id="refresh">刷新</button></div></header><main id="page" class="page" aria-live="polite"></main></div>
+<div id="overlay" class="overlay hidden"><section class="drawer" role="dialog" aria-modal="true" aria-labelledby="dialog-title"><div class="drawer-head"><h2 id="dialog-title"></h2><button id="close-dialog" aria-label="关闭">×</button></div><div id="dialog-body"></div></section></div>
+<div id="toast" role="status"></div>
+<script>window.API_TOKEN=__API_TOKEN__;</script><script src="/ui/demo.js"></script><script src="/ui/workspace.js"></script><script src="/ui/records.js"></script><script src="/ui/settings.js"></script><script src="/ui/create.js"></script><script src="/ui/proxies.js"></script><script src="/ui/cloud-config.js"></script><script src="/ui/environment-options.js"></script><script src="/ui/choice-picker.js"></script><script src="/ui/location-select.js"></script><script src="/ui/program-start.js"></script><script src="/ui/app.js"></script><script src="/ui/table-import.js"></script>
+</body></html>
